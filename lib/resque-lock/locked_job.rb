@@ -19,7 +19,7 @@ module Resque
           max_parallel_number =
             instance_variable_get(:@max_parallel_number) ||
             (respond_to?(:max_parallel_number) && klass.max_parallel_number) ||
-            2 ** 61
+            1
           key = lock_key *args
           if Resque.redis.incr "resque-lock:#{key}" < max_parallel_number
             true
